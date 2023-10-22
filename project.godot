@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="SQLServerDatabaseDeployer"
+run/main_scene="res://scenes/Deploy.tscn"
+config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="SQLServerDatabaseDeployer"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://lang/lang.en.translation")
+
+[physics]
+
+common/physics_ticks_per_second=1
+common/max_physics_steps_per_frame=1
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,0 +1,400 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7dgoogkc3o56"]
+
+[ext_resource type="Script" path="res://src/Deploy.cs" id="1_epilt"]
+[ext_resource type="Script" path="res://src/SetupProcess.cs" id="2_6kon3"]
+[ext_resource type="Texture2D" uid="uid://yxw4n66nwsum" path="res://assets/textures/arrowU.png" id="3_d6qov"]
+[ext_resource type="Texture2D" uid="uid://cxt5wfsg4j1qv" path="res://assets/textures/arrowD.png" id="4_j37fs"]
+[ext_resource type="Script" path="res://src/PreDeployment.cs" id="5_6ryvy"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_epilt")
+
+[node name="Win_Connection" type="Window" parent="."]
+initial_position = 1
+size = Vector2i(400, 250)
+visible = false
+exclusive = true
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+content_scale_mode = 1
+content_scale_aspect = 4
+
+[node name="Heading" type="Label" parent="Win_Connection"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -178.5
+offset_right = 178.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Welcome to the Database Transfer procedure!"
+horizontal_alignment = 1
+justification_flags = 0
+
+[node name="Label" type="Label" parent="Win_Connection"]
+offset_left = 26.295
+offset_top = 44.26
+offset_right = 272.295
+offset_bottom = 70.26
+text = "Enter Database Connection Info"
+
+[node name="Label_Error" type="Label" parent="Win_Connection"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.5
+offset_top = -48.88
+offset_right = 16.5
+offset_bottom = -22.88
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+
+[node name="GridContainer" type="GridContainer" parent="Win_Connection"]
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -97.5
+offset_top = -50.5
+offset_right = -22.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label_DBServer" type="Label" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+text = "Server Name"
+
+[node name="In_Server" type="LineEdit" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Server IP or domain name"
+caret_blink = true
+
+[node name="Label_DBName" type="Label" parent="Win_Connection/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Database Name"
+
+[node name="In_DBName" type="LineEdit" parent="Win_Connection/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "master"
+caret_blink = true
+
+[node name="Label_DBUser" type="Label" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+text = "Username"
+
+[node name="In_Username" type="LineEdit" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+text = "sa"
+placeholder_text = "sa"
+
+[node name="Label_DBPassword" type="Label" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+text = "Password"
+
+[node name="In_Password" type="LineEdit" parent="Win_Connection/GridContainer"]
+layout_mode = 2
+secret = true
+
+[node name="btnConnect" type="Button" parent="Win_Connection"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -40.0
+offset_right = -8.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Connect"
+
+[node name="Win_SetupInfo" type="AcceptDialog" parent="."]
+title = "Setup Process"
+initial_position = 2
+size = Vector2i(400, 351)
+transient = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win_SetupInfo"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 302.0
+
+[node name="Desc" type="Label" parent="Win_SetupInfo/VBoxContainer"]
+layout_mode = 2
+text = "This program will deploy the database by loading
+the following scripts  in the listed order:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Items" type="Label" parent="Win_SetupInfo/VBoxContainer"]
+layout_mode = 2
+text = "1. Prerequsite data/objects
+2. Tables
+3. Functions
+4. Views
+5. Stored procedures
+6. Triggers
+7. Postrequisite data/objects"
+
+[node name="Instructions" type="Label" parent="Win_SetupInfo/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "The following window will guide you through adding these items."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Win_SetupProcess" type="Window" parent="."]
+initial_position = 2
+size = Vector2i(850, 600)
+visible = false
+borderless = true
+script = ExtResource("2_6kon3")
+
+[node name="TabBar" type="TabBar" parent="Win_SetupProcess"]
+offset_right = 690.0
+offset_bottom = 31.0
+clip_tabs = false
+tabs_rearrange_group = 0
+tab_count = 7
+tab_0/title = "TAB_PREREQ"
+tab_1/title = "TAB_TABLES"
+tab_2/title = "TAB_FUNCTIONS"
+tab_3/title = "TAB_VIEWS"
+tab_4/title = "TAB_PROCS"
+tab_5/title = "TAB_TRIGGERS"
+tab_6/title = "TAB_POSTREQ"
+
+[node name="Control" type="Control" parent="Win_SetupProcess"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 785.0
+offset_bottom = 40.0
+
+[node name="Label_FileList" type="Label" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+offset_right = 78.0
+offset_bottom = 26.0
+text = "File List"
+justification_flags = 162
+
+[node name="FileList" type="ItemList" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+offset_top = 30.0
+offset_right = 550.0
+offset_bottom = 505.0
+select_mode = 1
+
+[node name="Label_TabInfo" type="Label" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 25.0
+offset_right = 70.0
+offset_bottom = 325.0
+grow_horizontal = 0
+text = "INFO_PREREQ"
+autowrap_mode = 3
+
+[node name="btn_AddFiles" type="Button" parent="Win_SetupProcess/Control"]
+layout_mode = 2
+offset_top = 515.0
+offset_right = 230.0
+offset_bottom = 546.0
+text = "Add Files"
+
+[node name="btn_MoveUp" type="Button" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = 250.0
+offset_right = -189.0
+offset_bottom = 281.0
+grow_horizontal = 0
+grow_vertical = 0
+disabled = true
+icon = ExtResource("3_d6qov")
+
+[node name="btn_MoveDown" type="Button" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = 285.0
+offset_right = -189.0
+offset_bottom = 316.0
+grow_horizontal = 0
+grow_vertical = 0
+disabled = true
+icon = ExtResource("4_j37fs")
+
+[node name="ButtonControls" type="VBoxContainer" parent="Win_SetupProcess/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 330.0
+offset_right = 50.0
+offset_bottom = 540.0
+grow_horizontal = 0
+
+[node name="btn_Move" type="Button" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+disabled = true
+text = "Move Selected
+To Other Tab"
+icon_alignment = 2
+
+[node name="btn_Remove" type="Button" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+disabled = true
+text = "Remove Selected"
+
+[node name="HSeparator" type="HSeparator" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+
+[node name="btn_Save" type="Button" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+text = "Save Deployment Preset"
+
+[node name="btn_Load" type="Button" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+text = "Load Deployment Preset"
+
+[node name="HSeparator2" type="HSeparator" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+
+[node name="btn_Confirm" type="Button" parent="Win_SetupProcess/Control/ButtonControls"]
+layout_mode = 2
+disabled = true
+text = "Confirm Scripts"
+
+[node name="ColorRect" type="ColorRect" parent="Win_SetupProcess"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Win_DatabaseName" type="AcceptDialog" parent="."]
+title = "Enter Database Name"
+initial_position = 1
+size = Vector2i(400, 250)
+min_size = Vector2i(400, 250)
+ok_button_text = "Deploy to This Database"
+
+[node name="VContainer" type="VBoxContainer" parent="Win_DatabaseName"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Win_DatabaseName/VContainer"]
+layout_mode = 2
+text = "INFO_DBNAME"
+autowrap_mode = 2
+
+[node name="Inputs" type="GridContainer" parent="Win_DatabaseName/VContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label_DBName" type="Label" parent="Win_DatabaseName/VContainer/Inputs"]
+layout_mode = 2
+text = "Database Name"
+
+[node name="In_DBName" type="LineEdit" parent="Win_DatabaseName/VContainer/Inputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+caret_blink = true
+
+[node name="Label_Collation" type="Label" parent="Win_DatabaseName/VContainer/Inputs"]
+layout_mode = 2
+text = "Collation Name"
+
+[node name="In_Collation" type="LineEdit" parent="Win_DatabaseName/VContainer/Inputs"]
+layout_mode = 2
+placeholder_text = "Latin1_General_100_CI_AI_SC_UTF8"
+
+[node name="Win_DeploymentConfirm" type="ConfirmationDialog" parent="."]
+initial_position = 1
+size = Vector2i(350, 175)
+wrap_controls = false
+unresizable = true
+borderless = true
+max_size = Vector2i(400, 250)
+ok_button_text = "Begin Deployment"
+cancel_button_text = "Go Back"
+script = ExtResource("5_6ryvy")
+
+[node name="Label" type="Label" parent="Win_DeploymentConfirm"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -79.5
+offset_right = 167.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "If all files have been added and are in the correct order, press \"Begin Deployment\" to commence the deployment procedure."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Win_DeployComplete" type="AcceptDialog" parent="."]
+title = ""
+initial_position = 2
+size = Vector2i(210, 100)
+borderless = true
+
+[node name="Label" type="Label" parent="Win_DeployComplete"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 202.0
+offset_bottom = 51.0
+text = "MSG_DEPLOY_COMPLETE"
+
+[connection signal="confirmed" from="Win_SetupInfo" to="." method="ProceedWindow"]
+[connection signal="multi_selected" from="Win_SetupProcess/Control/FileList" to="Win_SetupProcess" method="ToggleMoveButtons"]
+[connection signal="pressed" from="Win_SetupProcess/Control/ButtonControls/btn_Remove" to="Win_SetupProcess" method="RemoveFiles"]
+[connection signal="pressed" from="Win_SetupProcess/Control/ButtonControls/btn_Save" to="Win_SetupProcess" method="ShowSaveDialog"]
+[connection signal="pressed" from="Win_SetupProcess/Control/ButtonControls/btn_Load" to="Win_SetupProcess" method="ShowLoadDialog"]
+[connection signal="pressed" from="Win_SetupProcess/Control/ButtonControls/btn_Confirm" to="." method="ProceedWindow"]
+[connection signal="confirmed" from="Win_DatabaseName" to="." method="ProceedWindow"]
+[connection signal="canceled" from="Win_DeploymentConfirm" to="." method="ReturnToSetup"]
+[connection signal="confirmed" from="Win_DeploymentConfirm" to="." method="ProceedWindow"]
