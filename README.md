@@ -21,8 +21,10 @@ For this reason, the program is written in C# using the Godot Engine to generate
 - [X] Deploys to any SQL Server system (currently tested on SQL Server 2019+).
 
 ### Features In-Development
+
+- [ ] Syntax checking for save files/save file overhaul.
 - [ ] Display list of errors that ocurred in deployment on GUI (or output to log maybe).
-- [ ] Data transfer procedure
+- [ ] Data transfer procedure.
 
 ---
 
